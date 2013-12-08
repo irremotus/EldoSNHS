@@ -213,3 +213,11 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+
+
+#############
+## Dreamweaver and credentials
+#############
+
+[_]notes/
+_s_*
