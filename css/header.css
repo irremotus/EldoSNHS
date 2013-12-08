@@ -1,0 +1,43 @@
+#header {
+	width:1000px;
+	height:;
+	background-color:red;
+}
+
+img#banner {	
+	display:block;
+}
+
+div#divMenu {
+	width:100%;
+	background-color:;
+	min-height:0px;
+	padding:5px;
+}
+
+ul#ulMenu {
+	list-style:none;
+}
+	#ulMenu li {
+		padding:5px 10px;
+		margin:0;
+		margin-right:5px;
+		float:left;
+		background:yellow;
+		color:black;
+		border-radius:0;
+		
+		border-top-left-radius:5px;
+		border-top-right-radius:5px;
+	}
+		#ulMenu li:hover {
+			/*background:red;
+			color:black;*/
+			
+			background-color:#09C;
+		}
+	#ulMenu a {
+		text-decoration:none;
+	}
+
+body.login div#divMenu li.login, body.home div#divMenu li.home, body.users div#divMenu li.users, body.events div#divMenu li.events { background-color:orange; /*font-weight:bold;*/ }

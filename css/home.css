@@ -1,0 +1,24 @@
+.half {
+	width:450px;
+}
+
+.full {
+	width:900px;
+	float:left;
+}
+
+.left {
+	float:left;
+}
+
+.right {
+	float:right;
+}
+
+div {
+	
+}
+
+.homeedit {
+	min-height:150px;
+}

@@ -1,0 +1,15 @@
+#footer {
+	position:relative;
+	/*bottom:0px;
+	left:0px;*/
+	width:100%;
+	min-height:;
+	background-color:orange;
+	text-align:center;
+	padding:10px;
+	margin-top:0px;
+	
+	float:left;
+	
+	border-top:1px dashed #666;
+}
