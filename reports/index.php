@@ -25,6 +25,9 @@
                         	<td><h3>Items to show on report</h3></td>
                         </tr>
                         <tr>
+                        	<td><h4>General</h4></td>
+                        </tr>
+                        <tr>
                             <td>
                             <input type="checkbox" name="showName" id="chkName" value="1" />
                             <label for="chkName"> Name</label>
@@ -37,6 +40,9 @@
                             </td>
                         </tr>
                         <tr>
+                        	<td><h4>Points</h4></td>
+                        </tr>
+                        <tr>
                             <td>
                             <input type="checkbox" name="showPoints" id="chkPoints" value="1" />
                             <label for="chkPoints"> Total Points</label>
@@ -45,7 +51,52 @@
                         <tr>
                             <td>
                             <input type="checkbox" name="showGTPoints" id="chkGTPoints" value="1" />
-                            <label for="chkGTPoints"></label> Only show users with greater than <input type="number" style="width:50px;" name="GTPoints" id="numGTPoints" value="100" /> points
+                            <label for="chkGTPoints"></label> Only show users with at least <input type="number" style="width:50px;" name="GTPoints" id="numGTPoints" value="100" /> points
+                            </td>
+                        </tr>
+                        <tr>
+                        	<td><h4>Grade Level</h4></td>
+                        </tr>
+                        <tr>
+                            <td>
+                            <input type="checkbox" name="showGrade" id="chkGrade" value="1" />
+                            <label for="chkGrade"> Grade level</label>
+                            </td>
+                        </tr>
+                        <tr>
+                        	<td>Only show:</td>
+                        </tr>
+                        <tr>
+                            <td style="left:20px; position:relative;">
+                            <input type="checkbox" name="showFreshmen" id="chkFreshmen" value="1" />
+                            <label for="chkFreshmen"> Freshmen</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="left:20px; position:relative;">
+                            <input type="checkbox" name="showSophomores" id="chkSophomores" value="1" />
+                            <label for="chkSophomores"> Sophomores</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="left:20px; position:relative;">
+                            <input type="checkbox" name="showJuniors" id="chkJuniors" value="1" />
+                            <label for="chkJuniors"> Juniors</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="left:20px; position:relative;">
+                            <input type="checkbox" name="showSeniors" id="chkSeniors" value="1" />
+                            <label for="chkSeniors"> Seniors</label>
+                            </td>
+                        </tr>
+                        <tr>
+                        	<td><h4>Formatting</h4></td>
+                        </tr>
+                        <tr>
+                            <td>
+                            <input type="checkbox" name="showBorders" id="chkBorders" value="1" />
+                            <label for="chkBorders"> Show borders</label>
                             </td>
                         </tr>
                         

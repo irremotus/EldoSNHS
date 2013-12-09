@@ -1,64 +1,3 @@
-function pointsDoneLoading() {
-	$(".points").parent().on("focusin",null,null,function() {
-		if($(this).children().length == 1) {
-			buttons = '<input type="button" value="Save" onclick="savePoints(this.parentNode.children[0])" /><input type="button" value="Cancel" onclick="cancelSavePoints(this.parentNode)" />';
-			$(this).children().eq(0).after(buttons);
-		}
-	});
-
-	highlightcolor = "#F33";
-	centercolor = "yellow";
-	$(".points").parent().hover(function(e) {
-		uid = $(this).children().eq(0).attr("data-uid");
-		eid = $(this).children().eq(0).attr("data-eid");
-		$("[data-uid="+uid+"]").css("background-color",highlightcolor);
-		$("[data-eid="+eid+"]").css("background-color",highlightcolor);
-		//$("[data-uid="+uid+"]").parent().css("background-color",highlightcolor);
-		//$("[data-eid="+eid+"]").parent().css("background-color",highlightcolor);
-		$(this).children().eq(0).css("background-color",centercolor);
-	}, function(e) {
-		uid = $(this).children().eq(0).attr("data-uid");
-		eid = $(this).children().eq(0).attr("data-eid");
-		$("[data-uid="+uid+"]").css("background-color","");
-		$("[data-eid="+eid+"]").css("background-color","");
-		//$("[data-uid="+uid+"]").parent().css("background-color","");
-		//$("[data-eid="+eid+"]").parent().css("background-color","");
-		$(this).css("background-color","");
-	});
-}
-
-function savePoints(inp) {
-	par = $(inp).parent();
-	id = inp.name;
-	elid = inp.id;
-	uid = inp.getAttribute("data-uid");
-	eid = inp.getAttribute("data-eid");
-	ps = inp.value;
-	requestData = "id="+id+"&uid="+uid+"&eid="+eid+"&points="+ps+"&elid="+elid;
-	request("/services/?service=points&action=edit&strict=1",requestData,savePoints_succeeded,savePoints_failed,true,true);
-	loadingImg = '<img id="loadingImg" src="/img/ajax-loader-2.gif">';
-	el = document.getElementById(elid);
-	$(el).parent().children().eq(2).remove();
-	$(el).parent().children().eq(1).replaceWith(loadingImg);
-}
-
-function savePoints_succeeded(ret) {
-	savedImg = '<img id="savedImg" style="position:relative; left:-15px;" src="/img/tick_64.png" height="15" width="15">';
-	elid = ret.data.elid;
-	el = document.getElementById(elid);
-	el.name = ret.data.id;
-	//$(el).parent().children().eq(1).replaceWith(savedImg);
-	$(el).parent().children().eq(1).remove();
-	//$(el).after(savedImg).show(2000).remove();
-}
-function savePoints_failed(ret) {
-	alert("Could not save points.");
-}
-function cancelSavePoints(par) {
-	$(par).children().eq(2).remove();
-	$(par).children().eq(1).remove();
-}
-
 function showLoading() {
 	document.getElementById('content').style.display = 'none';
 	loadingImg = '<img id="loadingImg" src="/img/ajax-loader-1.gif">';
@@ -109,6 +48,12 @@ function showReport(form) {
 	showEmail = 0;
 	showGTPoints = 0;
 	GTPoints = 0;
+	showGrade = 0;
+	showFreshmen = 0;
+	showSophomores = 0;
+	showJuniors = 0;
+	showSeniors = 0;
+	showBorders = 0;
 	for (i = 0; i < f.length; i++) {
 		name = f[i]['name'];
 		
@@ -122,6 +67,18 @@ function showReport(form) {
 			showGTPoints = 1;
 		else if (name == "GTPoints")
 			GTPoints = f[i]['value'];
+		else if (name == "showGrade")
+			showGrade = 1;
+		else if (name == "showFreshmen")
+			showFreshmen = 1;
+		else if (name == "showSophomores")
+			showSophomores = 1;
+		else if (name == "showJuniors")
+			showJuniors = 1;
+		else if (name == "showSeniors")
+			showSeniors = 1;
+		else if (name == "showBorders")
+			showBorders = 1;
 	}
 	
 	table = "";
@@ -145,6 +102,11 @@ function showReport(form) {
 		users[i].events = uevents;
 	}
 	
+	style = "<style>";
+	if (showBorders)
+		style += 'table { border: 1px solid black; border-collapse: collapse; } td { border: 1px solid black; }';
+	style += "</style>";
+	table += style;
 	table += "<table>";
 	table += "<tr>";
 	if (showName)
@@ -153,6 +115,8 @@ function showReport(form) {
 		table += "<th>Total Points</th>";
 	if (showEmail)
 		table += "<th>Email</th>";
+	if (showGrade)
+		table += "<th>Grade</th>";
 	table += "</tr>";
 	elid = 0;
 	for(i=0; i<users.length; i++) {
@@ -164,6 +128,18 @@ function showReport(form) {
 		}
 		if (showGTPoints && users[i].pointtotal < GTPoints)
 			continue;
+		if (showFreshmen || showSophomores || showJuniors || showSeniors) {
+			if (users[i].grade == 9 && !showFreshmen)
+				continue;
+			else if (users[i].grade == 10 && !showSophomores)
+				continue;
+			else if (users[i].grade == 11 && !showJuniors)
+				continue;
+			else if (users[i].grade == 12 && !showSeniors)
+				continue;
+			else if (users[i].grade == 0)
+				continue;
+		}
 		table += "<tr>";
 		if (showName)
 			table += "<td>"+users[i].lname+", "+users[i].fname+"</td>";
@@ -171,12 +147,14 @@ function showReport(form) {
 			table += "<td>"+users[i].pointtotal+"</td>";
 		if (showEmail)
 			table += "<td>"+users[i].email+"</td>";
+		if (showGrade)
+			table += "<td>"+users[i].grade+"</td>";
 		table += "</tr>";
 	}
 	table += "</table>";
 	
 	//document.getElementById('reportbox').innerHTML = table;
-	w = window.open("", "SNHS Report", "width=500, height=800");
+	w = window.open("", "SNHS Report", "width=800, height=800");
 	if (w == null || w.closed)
 		alert("The report window was blocked by a pop-up blocker. Please allow pop-ups from www.eldosnhs.com to use the reports feature.");
 	else {
@@ -187,13 +165,48 @@ function showReport(form) {
 		buttons += '<input type="button" class="noprint" value="Close" onClick="window.close()" />';
 		w.document.write(buttons);
 		w.document.write("<h2>SNHS Report</h2>");
-		if (showGTPoints)	
-			w.document.write("<h3>Only showing students who have more than "+GTPoints+" points</h3>");
+		ftext = "<h3>Showing ";
+		first = 1;
+		if (showFreshmen || showSophomores || showJuniors || showSeniors) {
+			if (showFreshmen) {
+				 if (!first) {
+				 	ftext += ", ";
+				 }
+				 first = 0;
+				 ftext += "Freshmen";
+			}
+			if (showSophomores) {
+				 if (!first) {
+				 	ftext += ", ";
+				 }
+				 first = 0;
+				 ftext += "Sophomores";
+			}
+			if (showJuniors) {
+				 if (!first) {
+				 	ftext += ", ";
+				 }
+				 first = 0;
+				 ftext += "Juniors";
+			}
+			if (showSeniors) {
+				 if (!first) {
+				 	ftext += ", ";
+				 }
+				 first = 0;
+				 ftext += "Seniors";
+			}
+		}
+		else {
+			ftext += "students";
+		}
+		if (showGTPoints)
+			ftext += " who have at least "+GTPoints+" points";
+		ftext += "</h3>";
+		w.document.write(ftext);
 		w.document.write(table);
 		w.document.write(buttons);
 	}
-	
-	pointsDoneLoading();
 	
 	hideLoading();
 }
