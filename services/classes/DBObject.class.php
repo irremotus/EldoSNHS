@@ -47,7 +47,7 @@
 				$func = "get_".$var;
 				return $this->$func();
 			}
-			return (isset($this->vars[$var])) ? $this->vars[$var] : "";
+			return (isset($this->vars[$var])) ? stripslashes($this->vars[$var]) : "";
 		}
 		
 		public function get_error() {
