@@ -16,6 +16,7 @@
                 <?php if($officer) { ?><a href="/checkin"><li class="checkin">Check-in</li></a><?php } ?>
                 <?php //if($officer) { <a href="/notifications"><li class="sms">SMS Notifications</li></a>} ?>
                 <?php if($officer) { ?><a href="/setup"><li class="setup">Setup</li></a><?php } ?>
+                <?php if($officer) { ?><a href="/reports"><li class="reports">Reports</li></a><?php } ?>
             <?php } ?>
         </ul>
     </div>
