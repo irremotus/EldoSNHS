@@ -60,7 +60,7 @@
 			
 			function editUser(id) {
 				popw = 250;
-				poph = 300;
+				poph = 310;
 				
 				w = document.body.clientWidth;
 				h = document.body.clientHeight;
