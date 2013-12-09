@@ -34,11 +34,18 @@
 				} else {
 					f.student.selectedIndex = 1;
 				}
+				// set the perms select box
 				perm = 1;
 				if(data.perms > 0) {
 					perm = data.perms;
 				}
 				f.perms.selectedIndex = perm-1;
+				// set the grade select box
+				grade = 0;
+				if(data.grade > 0) {
+					grade = data.grade;
+				}
+				f.grade.selectedIndex = grade-9;
 				
 				hideLoading();
 			}
@@ -112,6 +119,17 @@
                                 <option value="1">Student</option>
                                 <option value="2">Officer</option>
                                 <option value="3">Admin</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Grade:</td>
+                        <td>
+                            <select name="grade">
+                                <option value="9">Freshman</option>
+                                <option value="10">Sophomore</option>
+                                <option value="11">Junior</option>
+                                <option value="12">Senior</option>
                             </select>
                         </td>
                     </tr>

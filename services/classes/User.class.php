@@ -13,6 +13,7 @@
 			'email' => array("key" => "email", "name" => "Email", "type" => "text"),
 			'pass' => array("key" => "pass", "name" => "Password", "type" => "num"),
 			'student' => array("key" => "student", "name" => "Student", "type" => "text", "def" => 1),
+			'grade' => array("key" => "grade", "name" => "Grade", "type" => "num"),
 			'perms' => array("key" => "perms", "name" => "Permissions", "type" => "num", "def" => 1)
 		);
 		

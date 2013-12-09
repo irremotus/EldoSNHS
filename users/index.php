@@ -122,6 +122,7 @@
 					{name:"Last Name", key:"lname"},
 					{name:"First Name", key:"fname"},
 					{name:"Email", key:"email"},
+					{name:"Grade", key:"grade"},
 					{name:"Password", key:"pass"}
 				];
 				table = build_table(rowTemplate, ret.data);
@@ -175,6 +176,15 @@
                         </tr>
                         <tr>
                         	<td>Password:</td><td><input type="text" name="pass" id="pass" /><input type="button" value="Generate password" onClick="generatePassword()" /></td>
+                            <td>Grade:</td>
+                            <td>
+                            	<select name="grade">
+                                	<option value="9">Freshman</option>
+                                    <option value="10">Sophomore</option>
+                                    <option value="11">Junior</option>
+                                    <option value="12">Senior</option>
+                                </select>
+                            </td>
                         </tr>
                         <tr>
                             <td><input type="submit" value="Add User" /></td>
