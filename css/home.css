@@ -22,3 +22,7 @@ div {
 .homeedit {
 	min-height:150px;
 }
+
+.larger-text {
+	font-size:18px;
+}

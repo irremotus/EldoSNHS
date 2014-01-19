@@ -52,7 +52,7 @@
 					}
 				?>
                 
-                <div id="p_notes" class="half left">
+                <div id="p_notes" class="half left larger-text">
                 	<h2><?php echo $p_notes_title ?></h2>
                     <?php
                     if($hasperm) {
@@ -83,7 +83,7 @@
 					?>
                 </div>
                 
-                <div id="p_info" class="full">
+                <div id="p_info" class="full larger-text">
                 <h2><?php echo $p_info_title ?></h2>
                     <?php
                     if($hasperm) {
